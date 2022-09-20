@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html>
+
+    <!--Coding By 오윤택-->
+    <!--2022_07_20_수요일-->
+
+<head>
+    <meta charset="UTF-8"> 
+    <title>Frame Animation</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    
+    <style>
+        #main-header { padding: 1px 0px; }
+
+        .master-title {
+            font-size: 30px;
+            color: #181818;
+        }
+
+        .master-description {
+            font-size: 15px; font-weight: 500;
+            color: #383838;
+        }
+    </style>
+
+    <style>
+        #main-navigation {
+            border-top: 3px solid rgb(151, 13, 87);
+            border-bottom: 3px solid rgb(151, 13, 87);
+            margin-top: 10px;
+            margin-bottom: 30px;
+            height: 50px;
+            text-align:center;
+        }
+    </style>
+
+    <style>
+        div { text-align: center; }
+        img.main {
+            animation: rotate_image 60s linear infinite;
+            top: 50% ;
+            left: 50% ;
+            color: black;
+            background-color: block;
+        }
+
+        @keyframes rotate_image {
+            100% {
+                transform: rotate(360deg);
+            }
+        } 
+    </style>
+
+    <!-- <script>
+        $(document).ready(function () {
+            $('button').click(function () {
+                $('.main').fadeOut('slow');
+            });
+        });
+    </script> -->
+
+    <link rel="stylesheet" href="jquery.lightbox.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="jquery.lightbox.min.js"></script>
+
+    <script>
+            // 이벤트 연결
+        $(document).ready(function () {
+            $('a.light').lightBox () ;
+        });
+    
+    </script>
+
+</head>
+
+<body>
+
+    <div id="page-wrapper">
+
+        <header id="main-header">
+            <hgroup>
+                <h1 class="master-title">IT SecTor</h1>
+                <a href="https://www.naver.com" class="master-description">♥Go To Main Page♥</a>
+            </hgroup>
+        </header>
+    </div>
+        
+        <nav id="main-navigation">
+            <h4>I.T. What Type Of Jobs Are There ?</h4>
+        </nav>
+
+
+    <div class="main">
+        <img src="1.png" class="main" width="300">            
+        <br><br><p><i>Life is Circle</i></p>
+        <h2>▼Click To Page▼</h2>
+
+        <a class="light" href="slide1.PNG">
+            <img src="ikon1.png" width="150">
+            <!-- <p><i>Programmer</i></p> -->
+        </a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a class="light" href="slide2.PNG">
+            <img src="ikon2.PNG" width="150">
+            <!-- <p><i>Web Developer</i></p> -->
+        </a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a class="light" href="slide3.PNG">
+            <img src="ikon3.PNG" width="150">
+            <!-- <p><i>Web Designer</i></p> -->
+        </a>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+    </div>
+
+
+</body>
+
+</html>

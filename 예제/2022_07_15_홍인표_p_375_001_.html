@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <script src = "https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        // $(document).ready(function(){
+        // $('img').attr('alt','jQuery 라이브러리를 사용한 속성 지정');
+        // $('img').attr('src','https://placekitten.com/200/300');
+        // $('img').attr('Width','100');
+        // });    
+        $(document).ready(function(){
+            $('img').attr({
+                alt: 'jQuery 라이브러리를 사용한 속성 지정',
+                src: function (index){
+                var size = (index + 1 ) * 100;
+                return 'https://dummyimage.com/600x400/000/fff' + size + 'x100';
+
+                }
+            }
+            );
+        });
+
+
+    </script>
+
+</head>
+
+<body>
+
+
+</body>
+</html>

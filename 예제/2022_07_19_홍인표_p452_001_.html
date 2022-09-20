@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Basic</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,
+    minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Roboto , "Helvetica Neue", Arial, sans-serif;
+        }
+        a { text-decoration: none; }
+        img { border: 0;}
+        li { list-style: none;}
+    </style>
+    <!-- 공통 -->
+    <style>
+        .container {
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 10px;
+            padding-right: 10px;O
+        }
+    </style>
+    <!-- 헤더 -->
+    <style>
+        #main-header {
+            padding: 10px 5px;
+        }
+        #main-header h1{
+            font-size: 35px;
+            font-weight: normal;
+            line-height: 27px;
+            color: #222;
+        }
+        #main-header ul{
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        #main-header li{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        #main-header li a{
+            color: #555;
+        }
+        #main-header li.active a{
+            color: black;
+            font-weight: 500;
+        }
+        #main-header label {
+            text-align: center;
+            float: right;
+            width: 40px;
+            height: 27px;
+            line-height: 27px;
+            color: #222;
+            border: 1px solid #222;
+            border-radius: 5px
+        }
+        #checkbox {
+            display: none;
+        }
+        #checkbox {
+            display: block;
+        }
+        #checkbox:checked + nav {
+            display: none;
+        }
+    </style>
+    <!-- 본문과 푸터  -->
+    <style>
+        #main-content {
+            background: #00afa0;
+            padding: 40px 15px 30px;
+        }
+        #main-content h1{
+            text-align: center;
+            margin-bottom: 20px;
+            color:  white;
+            font-weight: 500;
+        }
+        #main-content p{
+            color: #222;
+            text-align: center;
+            color: white;
+        }
+        #sub-content {
+            padding-top: 30px;
+        }
+        #sub-content h1 {
+            text-align: center;
+            color: #333;
+        }
+        #sub-content h2 {
+            text-align: center;
+            color: #333;
+            font-size: 17px;
+        }
+        #sub-content p {
+            color: #555;
+        }
+        #sub-content img {
+            width: 200px;
+            display: block;
+            margin: 10px auto;
+        }
+        #main-footer {
+            padding-top: 40px;
+        }
+        footer {
+            background: #323232;
+            color: white;
+            font-size: 12px;
+            text-align: center;
+            line-height: 40px;
+        }
+
+    </style>
+    
+</head>
+
+<body>
+    <div id="main-header">
+        <header class="container">
+            <div>
+                <label for="checkbox">▼</label>
+                <h1>먹보 홍인표</h1>
+            </div>
+            <input id="checkbox" checked="checked" type="checkbox">
+            <nav>
+                <ul>
+                    <li><a href="#">이력</a></li>
+                    <li><a href="#">자기소개</a></li>
+                    <li class="active"><a href="#">네트워크</a></li>
+                    <li><a href="#">도움말</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <div id="main-content">
+        <article class="container">
+            <h1>짐은 아직 배고프다.</h1>
+            <p>I'm so hungry. -hip-</p>
+        </article>
+    </div>
+    <div id="sub-content">
+        <article class="container">
+            <h1>카와카츠 합정점</h1>
+            <h2>히레카츠 14,000원</h2>
+            <img src="don_03.jpg" alt="">
+            <p>부드러운 안심으로 만든 돈까스이다.
+                안쪽은 덜익혀 퍼석함보다는 부드러운 식감이 아주 좋았다.
+                같이 나온 셀러드는 중독성이 강한 소스가 뿌려져있고
+                와사비와 소금에 찍어먹는 맛이 아주 좋았다.
+            </p>
+            <br>
+            <h1>카와카츠 합정점</h1>
+            <h2>로스카츠 15,000원</h2>
+            <img src="don_04.jpg" alt="">
+            <p>등심으로 만들어 씹는 맛이 아주 좋은 돈까스이다.
+                끝에 지방이 붙은 부분은 기름의 고소함이 아주 좋았고 
+            한 입 베어물면 아주 맛난 고기를 촉촉하고 부드럽게 먹을 수 있어서 아주 좋았다.</p>
+
+        </article>
+    </div>
+    <div id="main-footer">
+        <footer class="container">
+            <div>Coding by 홍인표</div>
+        </footer>
+    </div>
+
+
+
+</body>
+
+</html>

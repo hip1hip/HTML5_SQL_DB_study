@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Document</title>
+
+    <script>
+        var output = '';
+
+        for (var i = 1; i < 8; i++) { 
+            for (var j= 8; j > 0; j--){
+            // for (var j= 1; j < 7-i ; j++){
+                if( i < j) {
+                    output += "  "
+                } else {
+                    output += " * "
+                }
+
+            }
+            for (var j= 8; j > 0; j--){
+            // for (var j= 1; j < 7-i ; j++){
+                if( i < j) {
+                    output += "   "
+                } else {
+                    output += " * "
+                }
+
+            }
+            output+= '\n';
+
+        }
+
+        alert(output);
+  
+
+    </script>
+    <style>
+
+
+    </style>
+</head>
+<body>
+
+
+
+
+
+
+</body>
+
+</html>
