@@ -1,0 +1,675 @@
+[ Oracle_command_홍인표_정리모음집 ] 
+
+검색어: ojdbc6.jar
+C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib 
+
+
+예제01
+
+SELECT bookname, publisher, price 
+FROM Book
+WHERE bookname LIKE '축구의 역사';
+
+프리웨이트 그룹해오
+프롬 웨얼 그룹바이 해비 오토바이
+
+list
+
+show history
+
+set history on
+
+SELECT phone
+from Customer
+where name = '김연아';
+
+select bookname, price
+from Book;
+
+select bookname, price
+from Book;
+
+select *
+from Book;
+
+select publisher
+from Book;
+
+select distinct publisher
+from Book;
+
+select *
+from Book
+where price < 20000;
+
+select *
+from Book
+where price BETWEEN 10000 AND 20000;
+
+select *
+from Book
+where price >= 10000 AND price <= 30000;
+
+select *
+from Book
+where publisher IN ('굿스포츠' , '대한미디어');
+
+select *
+from Book
+where publisher NOT IN ('굿스포츠' , '대한미디어');
+
+select bookname, publisher
+from Book
+where bookname LIKE '축구의 역사';
+
+select bookname, publisher
+from Book
+where bookname LIKE '%축구%';
+
+select *
+from Book
+where bookname LIKE '_구%';
+
+select *
+from Book
+where bookname LIKE '%축구%' AND price >=20000;
+
+select *
+from Book
+where publisher = '굿스포츠' OR publisher='대한미디어';
+
+select *
+from Book
+order by bookname;
+
+select *
+from Book
+order by price, bookname;
+
+select *
+from Book
+order by price DESC, publisher ASC;
+
+select *
+from Book
+order by price DESC, publisher ASC;
+
+select SUM(saleprice)
+from Orders;
+
+select SUM(saleprice) AS 총매출
+from Orders;
+
+select SUM(saleprice) AS 총매출 
+from Orders 
+where custid=2;
+
+select SUM(saleprice) AS tot,
+AVG(saleprice) AS AVE,
+MIN(saleprice) AS MINi,
+MAX(saleprice) AS Maxi
+from Orders;
+
+select COUNT (*)
+from Orders;
+
+select custid, COUNT (*) AS 도서수량 , SUM(saleprice) AS 총액
+from Orders 
+group by Custid;
+
+select custid, COUNT(*) AS 도서수량 
+from Orders 
+where saleprice >=8000
+group by custid 
+having count (*) >=2;
+
+select *
+from Customer , Orders;
+
+select *
+from Customer , Orders, book;
+
+
+select *
+from Customer , Orders
+where Customer.custid=Orders.custid;
+
+
+select *
+from Customer , Orders
+where customer.custid=Orders.custid
+order by Customer.custid;
+
+select name, saleprice 
+from customer, orders
+where customer.custid=orders.custid;
+
+
+
+select name, SUM(saleprice) 
+from customer, orders
+where customer.custid=orders.custid
+group by customer.name
+order by customer.name;
+
+select customer.name,book.bookname
+from customer, Orders, book
+where customer.custid=orders.custid AND orders.bookid=book.bookid;
+
+select staff.ename, staff.job
+from emp staff, emp manager
+where staff.mgr=manager.empno and manager.ename LIKE 'BLAKE';
+
+SELECT customer.name,book.bookname
+from customer, Orders, book
+where customer.custid=orders.custid AND orders.bookid=book.bookid AND book.price=20000;
+
+SELECT customer.name, saleprice
+from customer LEFT OUTER JOIN Orders ON customer.custid=orders.custid;
+
+select bookname 
+from book
+where price =(select MAX(price) from book);
+
+select custid
+from orders;
+
+select name 
+from customer 
+where custid IN (1,2,3,4,5);
+--,5 추가 하면 5박세리 추가됌--
+
+select name 
+from customer 
+where custid IN (select custid From Orders);
+
+--2022.08.08_개발자 홍인표--
+select name 
+from customer 
+where custid IN(select custid From orders where bookid IN(select bookid from book where publisher='대한미디어'));
+
+select b1.bookname 
+from Book b1
+where b1.price > (select avg(b2.price) from Book b2 where b2.publisher=b1.publisher);
+
+select name 
+from Customer
+where custid IN (select custid from Orders);
+
+select name 
+from Customer
+MINUS
+select name
+from customer
+where custid IN (select custid from Orders);
+
+select name , address
+from Customer cs
+where EXISTS (SELECT * FROM Orders od where cs.custid=od.custid);
+
+desc tab 
+
+select * from tab;
+
+CREATE TABLE NewBook(
+bookid NUMBER , 
+bookname VARCHAR2(20),
+publisher varchar2 (20),
+price number,
+primary key (bookid));
+
+desc Newbook;
+
+Create table NewBook2 ( 
+bookid NUMBER PRIMARY KEY , 
+bookname VARCHAR2(20),
+publisher varchar2 (20),
+price number);
+
+desc Newbook2;
+
+select * from tab;
+
+Create table NewBook3 (
+bookname VARCHAR2(20) NOT NULL,
+publisher varchar2 (20) UNIQUE , 
+PRICE NUMBER DEFAULT 10000 CHECK(price > 1000),
+PRIMARY KEY (bookname,publisher));
+
+DROP TABLE NewBook2;
+
+DROP TABLE NewBook3;
+
+
+------------------------
+
+
+Create table NewCustomer(
+custid NUMBER PRIMARY KEY,
+name VARCHAR2(40),
+address VARCHAR2(40),
+tel VARCHAR2(30));
+
+create table NewOrders (
+orderid NUMBER,
+custid NUMBER NOT NULL,
+bookid NUMBER NOT NULL,
+saleprice NUMBER,
+orderdate DATE,
+PRIMARY KEY(orderid),
+FOREIGN KEY(custid) REFERENCES NewCustomer(custid) ON DELETE CASCADE);
+
+SELECT * FROM TAB;
+
+ALTER TABLE NewBook ADD isbn VARCHAR2(13);
+
+ALTER TABLE NewBook MODIFY isbn NUMBER;
+
+desc NEWbook
+
+ALTER TABLE NewBook DROP COLUMN isbn ;
+
+desc NEWbook
+
+select *from user_constraints;
+
+select * from all_cons_columns;
+
+ALTER TAbLE Newbook drop primary key;
+
+ALTER TABLE NewBook MODIFY bookid NUMBER NOT NULL;
+
+ALTER TABLE NewBook ADD PRIMARY KEY(bookid);
+
+DROP TABLE NewBook;
+
+DROP TABLE NewOrders;
+DROP TABLE NewCustomer;
+
+INSERT INTO Book(bookid, bookname , publisher, price)
+        VALUES (11,'스포츠의학','한솔의학서적',90000);
+        
+INSERT INTO Book
+    VALUES(12,'스포츠의학','한솔의학서적',90000);
+    
+
+INSERT INTO Book (bookid,bookname,publisher )
+    VALUES(14,'스포츠의학','한솔의학서적');   
+    
+select * from book;
+
+select * from imported_book;
+
+insert into Book (bookid,bookname , price , publisher)
+select bookid, bookname, price, publisher
+from imported_book;
+
+ALTER TABLE imported_book
+MODIFY bookid namber;
+    
+--    데이터가 2개씩 겹치는 경우 --
+
+DROP TABLE Imported_book
+CASCADE Constraints purge;
+
+select * from book;
+
+DELETE FROM Customer
+where custid=5;
+
+rollback;
+select * from Customer;
+
+DELETE FROM Customer
+where custid = 5;
+COMMIT;
+
+ROLLBACK;
+SELECT*FROM Customer;
+
+
+--연습문제 시작--
+--1-1
+select bookid, bookname
+from book
+where bookid LIKE '1';
+
+--정답
+select bookid, bookname
+from book
+where bookid=1;
+
+--1-2
+select bookname , price
+from Book
+WHERE price>20000;
+
+
+
+--1-3
+select SUM(saleprice) as 총매출
+from orders
+where custid=1;
+--정답
+select  SUM(saleprice) as 총매출 
+from customer, orders
+where customer.custid=Orders.custid
+AND customer.name LIKE '박지성';
+
+
+--1-4
+select custid, count(*) as 도서수량
+from orders
+where custid =1
+group by custid;
+--정답 
+select count(*) as 도서수량
+from Customer,orders
+where customer.custid=Orders.custid
+AND Customer.name Like '박지성';
+
+--1-5
+select custid , count(publsher)
+from customer, book
+where customer.custid=book.custid
+group by custid;
+
+select name, SUM(publisher) 
+from customer, book
+where customer.custid=book.custid
+group by customer.name
+order by customer.name;
+--정답
+SELECT COUNT (DISTINCT publisher)
+FROM Customer , Orders, Book
+where Customer.custid=Orders.custid 
+AND Customer.custid=Book.bookid
+AND Customer.name Like '박지성';
+
+
+--1-6
+--정답
+select bookname , price , price-saleprice
+From Customer , Orders, Book
+WHERE Customer.custid=Orders.custid
+and orders.bookid=book.bookid
+and Customer.name Like '박지성';
+
+
+--1-7
+select bookname
+from book
+minus
+select bookname
+from book
+where bookid in (select bookid
+from orders
+where custid In (select custid
+from customer
+where name='박지성'));
+
+
+create table R1(
+A NUMBER PRIMARY KEY,
+B NUMBER,
+C NUMBER
+);
+
+create table R2(
+B NUMBER PRIMARY KEY,
+C NUMBER,
+D NUMBER
+);
+
+INSERT INTO R1 (A,B,C) VALUES (1,2,3);
+INSERT INTO R1 (A,B,C) VALUES (4,2,3);
+INSERT INTO R1 (A,B,C) VALUES (7,8,9);
+SELECT * FROM R1;
+
+INSERT INTO R2 (B,C,D) VALUES (2,3,10);
+INSERT INTO R2 (B,C,D) VALUES (2,3,11);
+INSERT INTO R2 (B,C,D) VALUES (6,7,12);
+SELECT * FROM R2;
+
+DELETE FROM R2;
+DROP TABLE R2;
+
+create table R2(
+B NUMBER,
+C NUMBER,
+D NUMBER
+);
+
+SELECT * FROM R2;
+
+SELECT R1.A, R1.B, R1.C, R2.B, R2.C, R2.D
+FROM R1 RIGHT OUTER JOIN R2 ON R1.C=R2.C;
+
+select custid "고객번호",ROUND(SUM(saleprice)/COUNT(*), -2) "평균금액"
+FROM Orders
+GROUP BY custid;    
+
+select bookid , REPLACE(bookname, '야구','농구') bookname, publisher , price 
+from Book;
+
+SELECT * FROM tab;
+
+
+select * from tab;
+
+select abs(-78) , abs(+78)
+from Dual;
+
+select Round(4.875,1)
+from Dual;
+
+select custid "고객번호",ROUND(SUM(saleprice)/COUNT(*), -2) "평균금액"
+FROM Orders
+GROUP BY custid;
+
+select bookid , REPLACE(bookname, '야구','농구') bookname, publisher , price 
+from Book;
+
+select bookname "제목" , LENGTH(bookname) "글자수",
+    LENGTH(bookname)"바이트수"
+    from Book
+    WHERE publisher='굿스포츠';
+    
+select SUBSTR(name,1,1)"성", COUNT(*) "인원"
+from Customer
+group by SUBSTR (name, 1, 1);
+
+select TO_DATE('2022-07-01','yyyy-mm-dd')-5 BEFORE,
+TO_DATE('2020-07-01','yyyy-mm-dd')+5 AFTER
+from Dual;
+    
+    
+SELECT orderid "주문번호", orderdate "주문일", orderdate+10 "확정"
+from Orders;
+
+select orderid "주문번호", TO_CHAR(orderdate,'yyyy-mm-dd dy') "주문일",
+custid "고객번호", bookid "도서번호"
+FROM Orders
+WHERE orderdate=TO_DATE('20200707','yyyymmdd');
+
+select SYSDATE,
+TO_CHAR(SYSDATE, 'yyyy-mm-dd dy hh24:mi:ss') "SYSDATE_1"
+FROM Dual;
+    
+SELECT
+    * FROM mybook;
+    
+SELECT price+100
+FROM mybook
+WHERE bookid=3;
+
+select sum(price),AVG(price), COUNT(*), COUNT(price)
+from mybook;
+
+select SUM(price),AVG (price), COUNT(*)
+FROM Mybook
+Where bookid >=4;
+
+select *
+from Mybook
+WHERE price IS NULL;
+
+select *
+from Mybook
+WHERE price='';
+
+select name "이름", NVL(phone, 'unknown')"전화번호"
+from Customer;
+
+select ROWNUM "순번", custid , name , phone
+from Customer 
+where ROWNUM <=2;
+
+select ROWNUM "순번", custid , name , phone
+from Customer 
+where ROWNUM <=2
+ORDER BY name;
+
+select ROWNUM "순번", custid , name , phone
+from (Select custid, name,phone
+from customer
+order by name)
+where ROWNUM <=2;
+
+--------------------------------------------------------------------------
+
+select orderid, saleprice 
+from orders 
+where saleprice <=(select AVG(saleprice)from orders);
+
+select orderid,custid, saleprice
+from Orders md 
+where saleprice > (select avg (saleprice) from orders so where md.custid=so.custid);
+
+select SUM(saleprice)"total"
+from Orders
+WHERE custid NOT IN (select custid from Customer where address LIKE '%대한민국%');
+
+SELECT orderid , saleprice
+FROM Orders 
+WHERE saleprice > ALL (SELECT saleprice FROM Orders WHERE custid='3');
+
+SELECT orderid , saleprice
+FROM Orders 
+WHERE saleprice;
+
+SELECT orderid , saleprice
+FROM Orders 
+WHERE saleprice > ALL;
+
+select SUM(saleprice) "total"
+FROM Orders od 
+WHERE NOT EXISTS (SELECT * FROM Customer cs WHERE address LIKE '%대한민국%' AND cs.custid=od.custid);
+
+select (select name from Customer CS WHERE cs.custid=od.custid) "name", SUM(saleprice) "total"
+FROM Orders od 
+GROUP BY od.custid;
+
+alter TAble Orders ADD bookname VARCHAR2(40);
+
+ALTER TABLE Orders ADD bookname VARCHAR2(40);
+UPDATE Orders 
+SET bookname=(SELECT bookname FROM Book WHERE Book.bookid=Orders.bookid);
+
+SELECT cs.name, SUM(od.saleprice) "total"
+FROM (SELECT custid, name FROM Customer WHERE custid <=2) cs, Orders od 
+WHERE cs.custid=od.custid
+GROUP BY cs.name;
+
+show parameter;
+
+SELECT
+    * FROM Book 
+    WHERE bookname LIKE'%축구%';
+    
+create view vhong_book    
+AS SELECT * 
+FROM Book 
+WHERE bookname LIKE '%축구%';    
+
+CREATE VIEW vw_Customer
+AS SELECT *
+FROM Customer
+WHERE address LIKE '%대한민국%';
+
+SELECT
+    * FROM vw_Customer;
+
+create view vw_Orders (orderid, custid, name,bookid, bookname , saleprice, orderdate)
+as SELECT od.orderid, od.custid, cs.name, od.bookid, bk.bookname, od.saleprice, od.orderdate
+FROM ORDERS od, Customer cs , Book bk
+WHERE od.custid=cs.custid AND od.bookid=bk.bookid;
+
+select orderid, bookname, saleprice
+from vw_orders
+WHERE name ='김연아';
+
+create or replace view vw_customer (custid,name,address)
+AS SELECT custid, name, address
+FROM Customer
+WHERE address LIKE'%영국%';
+
+select *
+from vw_customer;
+
+
+drop view vhong_book;
+
+SELECT
+    * FROM vhong_book;
+    
+SELECT
+    * FROM user_users;    
+
+SELECT
+    * FROM user_views;
+    
+    SELECT
+    * FROM user_Constraints;
+    
+SELECT
+    * FROM user_cons_columns;
+    
+select rowid , name 
+from customer 
+where custid='1';
+
+create index ix_Book ON Book (bookname);
+
+create index ix_Book2 ON Book (publisher,price);
+
+
+SELECT
+    * FROM Book Where publisher='대한미디어' AND price >= 30000;
+    
+alter index ix_Book REBUILD;
+
+Drop index ix_Book;
+
+
+---------------------------------------------------------------
+
+DROP User madang CASCADE;
+CREATE User madang IDENTIFIED BY madang DEFAULT TABLESPACE users TEMPORARY TABLESPACE temp PROFILE DEFAULT;
+GRANT CONNECT, RESOURCE TO madang;
+GRANT CREATE VIEW, CREATE SYNONYM TO madang;
+GRANT UNLIMITED TABLESPACE TO madang;
+ALTER User madang ACCOUNT UNLOCK;
+
+conn madang/madang;
+
+
+CREATE TABLESPACE md_tbs
+    DATAFILE 'C:\madnag\oradata\md_tbs_date01.dbf'
+    SIZE 10M;
+CREATE TABLESPACE md_test
+    DATAFILE 'C:\madnag\oradata\md_tbs_date01.dbf'
+    SIZE 10M;
+
+
+
